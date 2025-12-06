@@ -1,9 +1,9 @@
-'use client'
+"use client"
 
-import { DotFile } from '@/lib/dotfiles-data'
-import { ChevronLeft, ChevronRight, Copy, Check } from 'lucide-react'
-import { useState } from 'react'
-import { Button } from '@/components/ui/button'
+import type { DotFile } from "@/lib/dotfiles-data"
+import { ChevronLeft, ChevronRight, Copy, Check } from "lucide-react"
+import { useState } from "react"
+import { Button } from "@/components/ui/button"
 
 interface FileViewerProps {
   file: DotFile | null
@@ -28,13 +28,11 @@ export function FileViewer({ file, onPrevious, onNext, canGoPrevious, canGoNext 
     return (
       <div className="flex-1 flex items-center justify-center bg-card">
         <div className="text-center">
-          <div className="text-6xl mb-4 text-primary glow-strong">◊</div>
+          <div className="text-6xl mb-4 text-terminal-blue glow-strong">◊</div>
           <div className="text-xl text-muted-foreground glow">
-            {'>'} SELECT A FILE TO VIEW_
+            <span className="text-terminal-blue">{">"}</span> SELECT A FILE TO VIEW_
           </div>
-          <div className="text-sm text-muted-foreground mt-4">
-            Use sidebar or search to browse dotfiles
-          </div>
+          <div className="text-sm text-muted-foreground mt-4">Use sidebar or search to browse dotfiles</div>
         </div>
       </div>
     )
@@ -45,28 +43,28 @@ export function FileViewer({ file, onPrevious, onNext, canGoPrevious, canGoNext 
       {/* File header */}
       <div className="border-b-4 border-border p-4 flex items-center justify-between">
         <div className="flex-1">
-          <h2 className="text-2xl font-bold text-primary glow mb-1">
-            {'>'} {file.name}
+          <h2 className="text-2xl font-bold glow mb-1">
+            <span className="text-terminal-blue">{">"}</span> <span className="text-primary">{file.name}</span>
           </h2>
           <p className="text-sm text-muted-foreground">{file.description}</p>
           <div className="flex flex-wrap gap-2 mt-2">
             {file.tags.map((tag) => (
               <span
                 key={tag}
-                className="text-xs px-2 py-1 bg-accent text-accent-foreground border-2 border-border glow"
+                className="text-xs px-2 py-1 bg-accent text-accent-foreground border-2 border-terminal-blue/50 glow"
               >
                 #{tag}
               </span>
             ))}
           </div>
         </div>
-        
+
         <div className="flex items-center gap-2">
           <Button
             onClick={handleCopy}
             variant="outline"
             size="sm"
-            className="border-2 border-border hover:border-primary hover:glow"
+            className="border-2 border-border hover:border-terminal-blue hover:text-terminal-blue hover:glow bg-transparent"
           >
             {copied ? (
               <>
@@ -85,7 +83,7 @@ export function FileViewer({ file, onPrevious, onNext, canGoPrevious, canGoNext 
 
       {/* File content */}
       <div className="flex-1 overflow-auto p-6">
-        <pre className="text-sm leading-relaxed text-foreground glow font-code">
+        <pre className="text-sm leading-relaxed text-foreground glow font-mono">
           <code>{file.content}</code>
         </pre>
       </div>
@@ -96,21 +94,21 @@ export function FileViewer({ file, onPrevious, onNext, canGoPrevious, canGoNext 
           onClick={onPrevious}
           disabled={!canGoPrevious}
           variant="outline"
-          className="border-2 border-border hover:border-primary hover:glow disabled:opacity-30"
+          className="border-2 border-border hover:border-terminal-blue hover:text-terminal-blue hover:glow disabled:opacity-30 bg-transparent"
         >
           <ChevronLeft className="w-4 h-4 mr-2" />
           PREVIOUS
         </Button>
-        
+
         <div className="text-sm text-muted-foreground">
-          USE ARROW KEYS TO NAVIGATE
+          <span className="text-terminal-blue">[TIP]</span> USE ARROW KEYS TO NAVIGATE
         </div>
-        
+
         <Button
           onClick={onNext}
           disabled={!canGoNext}
           variant="outline"
-          className="border-2 border-border hover:border-primary hover:glow disabled:opacity-30"
+          className="border-2 border-border hover:border-terminal-blue hover:text-terminal-blue hover:glow disabled:opacity-30 bg-transparent"
         >
           NEXT
           <ChevronRight className="w-4 h-4 ml-2" />

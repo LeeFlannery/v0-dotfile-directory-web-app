@@ -1,5 +1,5 @@
-@import 'tailwindcss';
-@import 'tw-animate-css';
+@import "tailwindcss";
+@import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -15,31 +15,32 @@
   --primary-foreground: oklch(0.12 0.02 90);
   --secondary: oklch(0.25 0.03 90);
   --secondary-foreground: oklch(0.85 0.15 110);
-  --muted: oklch(0.20 0.02 90);
-  --muted-foreground: oklch(0.55 0.10 110);
-  --accent: oklch(0.65 0.20 40);
+  --muted: oklch(0.2 0.02 90);
+  --muted-foreground: oklch(0.55 0.1 110);
+  --accent: oklch(0.65 0.2 40);
   --accent-foreground: oklch(0.12 0.02 90);
-  --destructive: oklch(0.55 0.20 30);
+  --destructive: oklch(0.55 0.2 30);
   --destructive-foreground: oklch(0.85 0.15 110);
-  --border: oklch(0.30 0.05 110);
-  --input: oklch(0.20 0.02 90);
+  --border: oklch(0.3 0.05 110);
+  --input: oklch(0.2 0.02 90);
   --ring: oklch(0.75 0.18 110);
   --radius: 0.125rem;
-  --sidebar: oklch(0.10 0.02 90);
+  --sidebar: oklch(0.1 0.02 90);
   --sidebar-foreground: oklch(0.85 0.15 110);
   --sidebar-primary: oklch(0.75 0.18 110);
   --sidebar-primary-foreground: oklch(0.12 0.02 90);
-  --sidebar-accent: oklch(0.20 0.02 90);
+  --sidebar-accent: oklch(0.2 0.02 90);
   --sidebar-accent-foreground: oklch(0.85 0.15 110);
-  --sidebar-border: oklch(0.30 0.05 110);
+  --sidebar-border: oklch(0.3 0.05 110);
   --sidebar-ring: oklch(0.75 0.18 110);
+  /* Added terminal blue color #60A5FA */
+  --terminal-blue: #60a5fa;
 }
 
 @theme inline {
-  --font-sans: 'Geist Mono', 'Geist Mono Fallback';
-  --font-mono: 'Geist Mono', 'Geist Mono Fallback';
-  --font-display: var(--font-display);
-  --font-code: var(--font-code);
+  /* Fixed font variables to use the CSS variables from next/font */
+  --font-sans: var(--font-display), monospace;
+  --font-mono: var(--font-code), monospace;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -71,6 +72,8 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+  /* Added terminal-blue to theme */
+  --color-terminal-blue: var(--terminal-blue);
 }
 
 @layer base {
@@ -78,13 +81,12 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
-    font-family: var(--font-display), monospace;
+    @apply bg-background text-foreground font-sans;
   }
-  
+
   /* CRT scanline effect */
   body::before {
-    content: '';
+    content: "";
     position: fixed;
     top: 0;
     left: 0;
@@ -100,26 +102,20 @@
     pointer-events: none;
     z-index: 9999;
   }
-  
+
   /* Phosphor glow effect */
   .glow {
     text-shadow: 0 0 8px currentColor, 0 0 12px currentColor;
   }
-  
+
   .glow-strong {
     text-shadow: 0 0 10px currentColor, 0 0 20px currentColor, 0 0 30px currentColor;
   }
-  
+
   /* CRT border effect */
   .crt-border {
     border: 4px solid;
-    border-image: linear-gradient(135deg, 
-      oklch(0.4 0.1 110), 
-      oklch(0.3 0.05 110), 
-      oklch(0.25 0.03 110)
-    ) 1;
-    box-shadow: 
-      inset 0 0 20px rgba(0, 0, 0, 0.5),
-      0 0 20px oklch(0.75 0.18 110 / 0.3);
+    border-image: linear-gradient(135deg, oklch(0.4 0.1 110), oklch(0.3 0.05 110), oklch(0.25 0.03 110)) 1;
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5), 0 0 20px oklch(0.75 0.18 110 / 0.3);
   }
 }
